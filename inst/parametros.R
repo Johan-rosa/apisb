@@ -17,10 +17,19 @@ descripcion_parametros <- contenedores |>
 parametro <- c(
   "tipoEntidad",
   "entidad",
-  "persona",
+  "tipoEntidad_cambiaria",
+  "entidad_cambiaria",
+  "region",
+  "provincia",
+  "divisa",
+  "detalles",
   "instrumento",
-  "divisa"
-
+  "tipoCartera",
+  "tipoIndicador",
+  "indicador",
+  "componente",
+  "moneda",
+  "persona"
 )
 
 contenedores |>
@@ -28,8 +37,11 @@ contenedores |>
   purrr::map(
     \(parameter_list) {
       html_elements(parameter_list, "li") |>
-        html_text()
+        html_text() |>
+        stringr::str_squish() |>
+        str_remove("^[a-z]\\)")
     }
-  )
+  ) |>
+  set_names(parametro)
 
 
