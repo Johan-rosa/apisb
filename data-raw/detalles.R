@@ -14,7 +14,7 @@ descripcion_parametros <- contenedores |>
   html_elements("h1") |>
   html_text()
 
-parametro <- c(
+parametro_name <- c(
   "tipoEntidad",
   "entidad",
   "tipoEntidad_cambiaria",
@@ -32,16 +32,29 @@ parametro <- c(
   "persona"
 )
 
-contenedores |>
+detalles <- contenedores |>
   html_elements("ul") |>
   purrr::map(
     \(parameter_list) {
       html_elements(parameter_list, "li") |>
         html_text() |>
-        stringr::str_squish() |>
-        str_remove("^[a-z]\\)")
+        str_remove("^[a-z]\\)")  |>
+        stringr::str_squish()
     }
   ) |>
   set_names(parametro)
 
+string_to_df <- function(string) {
+  dplyr::tibble(string = string) |>
+    tidyr::separate(string, into = c("id", "label"), sep = " = ")
+}
 
+detalles <- detalles |>
+  purrr::imap(
+    \(detalles, name) {
+      if (stringr::str_detect(name, "[eE]ntidad")) return(string_to_df(detalles))
+      detalles
+    }
+  )
+
+usethis::use_data(detalles, overwrite = TRUE)
