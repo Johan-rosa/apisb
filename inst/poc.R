@@ -90,7 +90,7 @@ get_cartera <- function(
 
   end_point = switch (
     by,
-    clasificacion-riesgo = "creditos/clasificacion-riesgo",
+    "clasificacion-riesgo" = "creditos/clasificacion-riesgo",
     localidad = "captaciones/localidad",
     sector = "captaciones/sector-depositante"
   )
