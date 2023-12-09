@@ -42,7 +42,7 @@ detalles <- contenedores |>
         stringr::str_squish()
     }
   ) |>
-  set_names(parametro)
+  set_names(parametro_name)
 
 string_to_df <- function(string) {
   dplyr::tibble(string = string) |>

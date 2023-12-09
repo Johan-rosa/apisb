@@ -4,8 +4,8 @@
 #' @export
 get_cartera <- function(
     periodo_inicial = "2023-01",
+    entidad = NULL,
     periodo_final = NULL,
-    entidad = "popular",
     tipo_entidad = NULL,
     by = NULL,
     key = Sys.getenv("subban_primary")
@@ -15,8 +15,16 @@ get_cartera <- function(
   if (!is.null(by)) {
     checkmate::check_choice(
       by,
-      c("genero", "clasificacion-riesgo", "localidad", "moneda",
-        "sectores-economicos", "tipo", "facilidad", "inversiones")
+      c(
+        "genero",
+        "clasificacion-riesgo",
+        "localidad",
+        "moneda",
+        "sectores-economicos",
+        "tipo",
+        "facilidad",
+        "inversiones"
+      )
     )
 
     endpoint <- paste(endpoint, by, sep = "/")
