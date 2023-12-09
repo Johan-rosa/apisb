@@ -1,8 +1,6 @@
 
-#' @param tipo_entidad vector character c("AAyP", "BAyC", "BM", "CC", "EP",
-#'  "TODOS")
-#' @param by character string with one of these options c("moneda",
-#' "localidad", "sector")
+#' @param tipo_entidad vector character c("AAyP", "BAyC", "BM", "CC", "EP", "TODOS")
+#' @param by character string with one of these options c("moneda", "localidad", "sector")
 #' @export
 get_cartera <- function(
     periodo_inicial = "2023-01",
